@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { PatientService } from 'src/app/service/patient.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient',
@@ -19,7 +20,7 @@ export class PatientComponent {
   showAdminBoard = false;
   username?: string;
   patientList:any;
-  department:any;
+  department:any ="Oral Diagnosis & Radiology Department";
 
   constructor(private route:Router,private authService: AuthService, private tokenStorageService: TokenStorageService, private patientService: PatientService) { }
 
@@ -64,15 +65,27 @@ export class PatientComponent {
     };
 
     console.log('form ',this.form)
-    const existingData = JSON.parse(localStorage.getItem("patientdata") || '[]');
+    const patientdata = localStorage.getItem("patientdata")
+    let existingData = []
+    existingData = JSON.parse(patientdata != 'undefined' && patientdata != null ? patientdata : '[]' || '[]');
+
     // Check if the key already exists in localStorage
-    if (existingData) {
+    if (existingData.length == 0 || !existingData.find(item => item.patientID === f.value.patientID)) {
       this.patientList = existingData;
       // Update or add new data to the existing list
       this.patientList.push(this.form);
-    } 
-    // Store the updated data in localStorage
-    localStorage.setItem("patientdata", JSON.stringify(this.patientList));
+      Swal.fire({
+        icon: 'success',
+        title: 'Patient registered successfully'
+      })
+       // Store the updated data in localStorage
+      localStorage.setItem("patientdata", JSON.stringify(this.patientList));
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Patient already registered'
+      })
+    }
 
     // this.patientService.postPatientFrom(this.form).subscribe((data) => {
     //   console.log(data);

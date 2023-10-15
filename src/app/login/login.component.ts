@@ -41,21 +41,31 @@ export class LoginComponent {
 
   onSubmit(): void {
     const { username, password } = this.form;
-    this.authService.login(username, password).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.showSuccess();
-        {this.route.navigate(['/home'])}
-      },
-      err => {
-        this.isLoginFailed = true;
-        this.showError();
-      }
-    );
+    if(username =="admin" && password =="admin123"){
+      this.isLoginFailed = false;
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+      this.showSuccess();
+      {this.route.navigate(['/admin-dashboard/create-new-patient'])}
+    }else{
+      this.isLoginFailed = true;
+      this.showError();
+    }
+    // this.authService.login(username, password).subscribe(
+    //   data => {
+    //     this.tokenStorage.saveToken(data.accessToken);
+    //     this.tokenStorage.saveUser(data);
+    //     this.isLoginFailed = false;
+    //     this.isLoggedIn = true;
+    //     this.roles = this.tokenStorage.getUser().roles;
+    //     this.showSuccess();
+    //     {this.route.navigate(['/home'])}
+    //   },
+    //   err => {
+    //     this.isLoginFailed = true;
+    //     this.showError();
+    //   }
+    // );
 
   }
 
