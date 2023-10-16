@@ -16,7 +16,7 @@ import { DoctorListComponent } from './admin-dashboard/doctor/doctor-list/doctor
 import { DoctorComponent } from './admin-dashboard/doctor/doctor.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/admin-dashboard/create-new-patient', pathMatch: 'full'},
+  {path: '', redirectTo: '/admin-dashboard/add-new-patient', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'signup', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
@@ -26,7 +26,7 @@ const routes: Routes = [
   { path:'appoint-dashboard', component: AppointDashboardComponent},
   { path : 'appoint-dashboard/list', component: ListComponent},
   { path : 'admin-dashboard', component: AdminDashboardComponent},
-  { path : 'admin-dashboard/create-new-patient', component:PatientComponent},
+  { path : 'admin-dashboard/add-new-patient', component:PatientComponent},
   { path: 'users', component: UsersComponent},
   { path: 'admin-dashboard/patient-list', component: PatientListComponent}, 
   { path: 'admin-dashboard/doctor-list', component: DoctorListComponent},

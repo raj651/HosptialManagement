@@ -46,7 +46,7 @@ export class LoginComponent {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
       this.showSuccess();
-      {this.route.navigate(['/admin-dashboard/create-new-patient'])}
+      {this.route.navigate(['/admin-dashboard/add-new-patient'])}
     }else{
       this.isLoginFailed = true;
       this.showError();
@@ -104,7 +104,7 @@ export class LoginComponent {
     
     Toast.fire({
       icon: 'error',
-      title: 'Something Went Wrong!'
+      title: 'Incorrect Password!'
     })
   }
 
